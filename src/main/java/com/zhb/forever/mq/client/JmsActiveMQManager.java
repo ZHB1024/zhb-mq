@@ -54,6 +54,8 @@ public interface JmsActiveMQManager {
      */
     TextMessage receiveQueueMessage(String destinationName);
     
+    com.google.protobuf.Message receiveQueueRemoteMsgByDesNamePath(String destinationName,String path)throws Exception;
+    
 
 /*------Quene end---------------------------------------*/
     
