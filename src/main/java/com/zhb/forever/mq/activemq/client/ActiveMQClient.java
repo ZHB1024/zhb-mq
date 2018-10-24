@@ -1,14 +1,14 @@
-package com.zhb.forever.mq.client;
+package com.zhb.forever.mq.activemq.client;
 
 import javax.jms.Destination;
 import javax.jms.TextMessage;
 
 /**
 *@author   zhanghb<a href="mailto:zhb20111503@126.com">zhanghb</a>
-*@createDate 2018年10月23日上午11:13:17
+*@createDate 2018年10月24日下午3:01:16
 */
 
-public interface JmsActiveMQManager {
+public interface ActiveMQClient {
     
     /**
      * *向指定队列发送消息

@@ -1,4 +1,4 @@
-package com.zhb.forever.mq.client.impl;
+package com.zhb.forever.mq.activemq.client.impl;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -14,16 +14,15 @@ import org.springframework.jms.core.MessageCreator;
 
 import com.zhb.forever.framework.proto.ProtoResult;
 import com.zhb.forever.framework.proto.support.ProtoConverter;
-import com.zhb.forever.mq.client.JmsActiveMQManager;
-
+import com.zhb.forever.mq.activemq.client.ActiveMQClient;
 /**
 *@author   zhanghb<a href="mailto:zhb20111503@126.com">zhanghb</a>
-*@createDate 2018年10月23日上午11:15:15
+*@createDate 2018年10月24日下午3:01:53
 */
 
-public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
-    
-    private Logger logger = LoggerFactory.getLogger(JmsActiveMQManagerImpl.class);
+public class ActiveMQClientImpl implements ActiveMQClient {
+
+    private Logger logger = LoggerFactory.getLogger(ActiveMQClientImpl.class);
     
     private JmsTemplate jmsQueueTemplate;
     
@@ -141,6 +140,7 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
     public void setJmsTopicTemplate(JmsTemplate jmsTopicTemplate) {
         this.jmsTopicTemplate = jmsTopicTemplate;
     }   
+
 }
 
 
