@@ -32,7 +32,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
 
     /*------Quene begin---------------------------------------*/
     public void sendQueueDestinationMsg(Destination destination, final String msg) {
-        logger.info("向队列" + destination.toString() + "发送了消息------------" + msg);
         jmsQueueTemplate.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 return session.createTextMessage(msg);
@@ -41,7 +40,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
     }
     
     public void sendQueueDestinationNameMsg(String destinationName, final String msg) {
-        logger.info("向队列" + destinationName + "发送了消息------------" + msg);
         jmsQueueTemplate.send(destinationName, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 return session.createTextMessage(msg);
@@ -50,8 +48,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
     }
     
     public void sendQueueMessage(final String msg) {
-        String destination = jmsQueueTemplate.getDefaultDestination().toString();
-        logger.info("向队列" + destination + "发送了消息------------" + msg);
         jmsQueueTemplate.send(new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 return session.createTextMessage(msg);
@@ -60,7 +56,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
     }
     
     public void sendQueueRemoteMsg(String destinationName, byte[] msg) {
-        logger.info("向队列" + destinationName + "发送了消息------------" + msg.toString());
         ProtoResult pr = new ProtoResult();
         pr.setProtoBytes(msg);
         jmsQueueTemplate.send(destinationName, new MessageCreator() {
@@ -75,11 +70,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
         TextMessage tm = null;
         if (null != m) {
             tm = (TextMessage)m;
-            try {
-                logger.info("从队列" + destination.toString() + "收到了消息：\t" + tm.getText());
-            } catch (JMSException e) {
-                e.printStackTrace();
-            }
         }
         return tm;
     }
@@ -89,11 +79,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
         TextMessage tm = null;
         if (null != m) {
             tm = (TextMessage)m;
-            try {
-                logger.info("从队列" + destinationName + "收到了消息：\t" + tm.getText());
-            } catch (JMSException e) {
-                e.printStackTrace();
-            }
         }
         return tm;
     }
@@ -120,7 +105,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
 /*------Topic begin---------------------------------------*/
     @Override
     public void sendTopicMessage(String destinationName, String msg) {
-        logger.info("向topic" + destinationName + "发送了消息------------" + msg);
         jmsTopicTemplate.send(destinationName, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 return session.createTextMessage(msg);
@@ -134,11 +118,6 @@ public class JmsActiveMQManagerImpl implements JmsActiveMQManager {
         TextMessage tm = null;
         if (null != m) {
             tm = (TextMessage)m;
-            try {
-                logger.info("从topic" + destinationName + "收到了消息：\t" + tm.getText());
-            } catch (JMSException e) {
-                e.printStackTrace();
-            }
         }
         return tm;
     }
