@@ -23,7 +23,7 @@ public class ActiveMQClientFactory {
     public static Destination getMQDestinationBean() {
         Object bean = SpringBeanLocator.getInstance(
                 Constants.ACTIVE_MQ_CLIENT_CONF).getBean(
-                        Constants.ACTIVE_MQ_DESTINATION);
+                        Constants.ACTIVE_MQ_DEFAULT_DESTINATION);
         return (Destination) bean;
     }
 
