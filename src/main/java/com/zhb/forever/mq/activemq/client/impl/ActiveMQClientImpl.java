@@ -30,6 +30,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
     
 
     /*------Quene begin---------------------------------------*/
+    @Override
     public void sendQueueDestinationMsg(Destination destination, final String msg) {
         jmsQueueTemplate.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
@@ -38,6 +39,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
         });
     }
     
+    @Override
     public void sendQueueDestinationNameMsg(String destinationName, final String msg) {
         jmsQueueTemplate.send(destinationName, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
@@ -46,6 +48,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
         });
     }
     
+    @Override
     public void sendQueueMessage(final String msg) {
         jmsQueueTemplate.send(new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
@@ -54,6 +57,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
         });
     }
     
+    @Override
     public void sendQueueRemoteMsg(String destinationName, byte[] msg) {
         ProtoResult pr = new ProtoResult();
         pr.setProtoBytes(msg);
@@ -64,6 +68,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
         });
     }
 
+    @Override
     public TextMessage receiveQueueMessage(Destination destination) {
         Message m = jmsQueueTemplate.receive(destination);
         TextMessage tm = null;
@@ -73,6 +78,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
         return tm;
     }
     
+    @Override
     public TextMessage receiveQueueMessage(String destinationName) {
         Message m = jmsQueueTemplate.receive(destinationName);
         TextMessage tm = null;
@@ -82,6 +88,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
         return tm;
     }
     
+    @Override
     public com.google.protobuf.Message receiveQueueRemoteMsgByDesNamePath(String destinationName,String path) throws Exception {
         Message m = jmsQueueTemplate.receive(destinationName);
         if (null == m) {
@@ -93,8 +100,7 @@ public class ActiveMQClientImpl implements ActiveMQClient {
             return null;
         }
         ProtoResult pr = (ProtoResult)object;
-        ProtoConverter pci = new ProtoConverter();
-        return pci.converFromProto(path, pr);
+        return ProtoConverter.converFromProto(path, pr);
     }
     
 /*------Quene end---------------------------------------*/
