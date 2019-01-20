@@ -13,7 +13,7 @@ import com.zhb.forever.mq.activemq.client.ActiveMQClient;
 
 public class ActiveMQClientFactory {
 
-    public static ActiveMQClient getRedisClientBean() {
+    public static ActiveMQClient getActiveClientBean() {
         Object bean = SpringBeanLocator.getInstance(
                 Constants.ACTIVE_MQ_CLIENT_CONF).getBean(
                         Constants.ACTIVE_MQ_CLIENT);
