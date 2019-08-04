@@ -11,11 +11,11 @@ import com.zhb.forever.framework.vo.KeyValueVO;
 *@createDate 2018年12月18日下午3:11:27
 */
 
-public class Consumer implements WorkHandler<KeyValueVO> {
+public abstract class Consumer implements WorkHandler<KeyValueVO> {
 
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
     
-    private final String name;
+    protected final String name;
     
     public Consumer(String name) {
         this.name = name;
@@ -23,9 +23,12 @@ public class Consumer implements WorkHandler<KeyValueVO> {
     
     @Override
     public void onEvent(KeyValueVO event) throws Exception {
-        Thread.currentThread().sleep(500);
-        logger.info("consumer:" + name +  "----" + event.getKey() + "***" + event.getValue());
+        logger.info("consumeThread"+ name + "***********开始");
+        consume(event.getKey(), event.getValue());
+        logger.info("consumeThread"+ name + "***********结束");
     }
+    
+    public abstract void consume(String key,String value) ;
 
 }
 

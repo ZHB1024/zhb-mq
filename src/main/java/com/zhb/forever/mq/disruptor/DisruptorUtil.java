@@ -43,7 +43,7 @@ public class DisruptorUtil {
                 ProducerType.MULTI,new SleepingWaitStrategy());
         
         
-        disruptor.handleEventsWithWorkerPool(new Consumer[] {new Consumer("消费者1"),new Consumer("消费者2")});
+        disruptor.handleEventsWithWorkerPool(new DisruptorUtil.TestConsumer[] {null});
         disruptor.start();
         
         RingBuffer<KeyValueVO> ringBuffer = disruptor.getRingBuffer();
@@ -57,6 +57,19 @@ public class DisruptorUtil {
     }
     
     public static void main(String[] args) {
+    }
+    
+    private class TestConsumer extends Consumer{
+
+        public TestConsumer(String name) {
+            super(name);
+        }
+
+        @Override
+        public void consume(String key, String value) {
+            System.out.println(key + ":" + value);
+        }
+        
     }
 
 }
